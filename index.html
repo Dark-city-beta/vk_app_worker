@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover">
+    <title>Наш Сайт</title>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* чтобы не было двойных скроллов */
+            background-color: #edeef0; /* Цвет фона VK по умолчанию, если iframe долго грузится */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block; /* убирает лишний отступ снизу */
+        }
+    </style>
+</head>
+<body>
+    <!-- ЗАМЕНИТЕ 'https://example.com/your-page.html' НА ВАШУ РЕАЛЬНУЮ ССЫЛКУ -->
+    <iframe id="siteFrame" src="https://muzaphoto.ru/zal-garmoniya-lokacziya-gotika"></iframe>
+
+    <script>
+        // Инициализация VK Bridge (рекомендуется)
+        vkBridge.send('VKWebAppInit');
+
+        // Можно добавить обработчик ошибок для iframe, если нужно
+        const iframe = document.getElementById('siteFrame');
+        iframe.onload = function() {
+            console.log('Iframe loaded successfully');
+            // Можно отправить событие в VK Bridge, если нужно, например, для изменения заголовка
+            // vkBridge.send("VKWebAppSetLocation", {"location": "page_name_in_iframe"});
+        };
+        iframe.onerror = function() {
+            console.error('Error loading iframe content');
+            // Можно показать сообщение об ошибке пользователю
+            document.body.innerHTML = '<p style="text-align:center; padding-top: 50px;">Не удалось загрузить страницу.</p>';
+        };
+    </script>
+</body>
+</html>
